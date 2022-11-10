@@ -12,12 +12,12 @@ dotenv.config({path:"./config/config.env"})
 const app=express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
 app.use(cors({
 origin:process.env.FRONTEND_URL,
 credentials:true,               //OTHERWISE WON'T BE ABLE TO USE COOKIE
 methods:["GET","POST","PUT","DELETE"]
 }))
-app.use(cookieParser())
 app.use("/api/v1",courseRouter)
 app.use("/api/v1",userRouter)
 app.use("/api/v1",paymentRoute)
@@ -32,11 +32,9 @@ app.use("/api/v1",otherRoute)
 
 
 
+export default app;
+app.get("/",(req,res)=>res.send(`<h1>site is working. click <a href=${process.env.FRONTEND_URL}> here </a> to visit frontend</h1>`))
 
-
-
-
-
+// app.get("/",(req,res)=>res.send("<h1>site is working. click <a href=${process.env.frontendurl} to visit frontend</h1>))
 
 app.use(ErrorMiddleware)
-export default app;
