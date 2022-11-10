@@ -4,14 +4,14 @@ import getDataUri from "../utils/dataUri.js"
 import ErrorHandler from "../utils/errorHandler.js"
 import cloudinary from "cloudinary"
 import { Stats } from "../models/Stats.js"
-import { catchAsyncErrors } from "../middlewares/CatchAsyncErrors.js"
+import { catchAsyncError } from "../middlewares/catchAsyncError.js"
 
 
 
 
 // get All Courses
 
-export const getAllCourses=catchAsyncErrors(async(req,res,next)=>{
+export const getAllCourses=catchAsyncError(async(req,res,next)=>{
 
     const      keyword=req.query.keyword || ""
     const     category=req.query.category || ""
@@ -38,7 +38,7 @@ export const getAllCourses=catchAsyncErrors(async(req,res,next)=>{
 
 
 // Create Course
-export const createCourse=catchAsyncErrors(async(req,res,next)=>{
+export const createCourse=catchAsyncError(async(req,res,next)=>{
     // before req from body need to doexpress.json,express.urlencoded
      const {title,description,category,createdBy}=req.body
      const file=req.file
@@ -72,7 +72,7 @@ const myCloud=await cloudinary.v2.uploader.upload(fileUri.content)
 
 // Get Course Lectures --After suscription
 
-export const getCourseLectures=catchAsyncErrors(async(req,res,next)=>{
+export const getCourseLectures=catchAsyncError(async(req,res,next)=>{
   const course=await Course.findById(req.params.id)
    
 if(!course)  return next(new ErrorHandler("Course not found",404))
@@ -86,7 +86,7 @@ await course.save()
   
 })
 // Add Lectures max video size 100mb because we are using free plan
-export const addLecture=catchAsyncErrors(async(req,res,next)=>{
+export const addLecture=catchAsyncError(async(req,res,next)=>{
   const {id}=req.params;
   const {title,description}=req.body
   const file=req.file
@@ -123,7 +123,7 @@ await course.save()
 })
   
 // DeleteCourse
-export const deleteCourse=catchAsyncErrors(async(req,res,next)=>{
+export const deleteCourse=catchAsyncError(async(req,res,next)=>{
   
   const {id}=req.params
   
@@ -144,7 +144,7 @@ export const deleteCourse=catchAsyncErrors(async(req,res,next)=>{
 })
 
 // Delete Lecture
-export const deleteLecture=catchAsyncErrors(async(req,res,next)=>{
+export const deleteLecture=catchAsyncError(async(req,res,next)=>{
   
   const {courseId ,lectureId}=req.query
   

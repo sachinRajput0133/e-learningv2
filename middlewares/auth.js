@@ -1,10 +1,10 @@
 import ErrorHandler from "../utils/errorHandler.js";
-import { catchAsyncErrors } from "./CatchAsyncErrors.js";
+import { catchAsyncError } from "./catchAsyncError.js";
 import jwt from "jsonwebtoken"
 import { User } from "../models/User.js";
 
 
-export const isAuthenticated = catchAsyncErrors(async(req, res, next)=>{
+export const isAuthenticated = catchAsyncError(async(req, res, next)=>{
   const { token } = req.cookies;
   if (!token)
     return next(new ErrorHandler("Please Login To access this resource", 401));

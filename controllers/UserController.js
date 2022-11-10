@@ -1,4 +1,4 @@
-import { catchAsyncErrors } from "../middlewares/CatchAsyncErrors.js";
+import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import { User } from "../models/User.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { sendEmail } from "../utils/sendEmail.js";
@@ -8,7 +8,7 @@ import { Course } from "../models/Course.js";
 import getDataUri from "../utils/dataUri.js";
 import cloudinary from "cloudinary";
 import { Stats } from "../models/Stats.js";
-export const registerUser = catchAsyncErrors(async (req, res, next) => {
+export const registerUser = catchAsyncError(async (req, res, next) => {
   const { name, email, password } = req.body;
   const file = req.file;
   
@@ -37,7 +37,7 @@ export const registerUser = catchAsyncErrors(async (req, res, next) => {
 });
 
 // login
-export const loginUser = catchAsyncErrors(async (req, res, next) => {
+export const loginUser = catchAsyncError(async (req, res, next) => {
   const { email, password } = req.body;
 
   // const file=req.file
@@ -57,7 +57,7 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Logout
-export const logoutUser = catchAsyncErrors(async (req, res, next) => {
+export const logoutUser = catchAsyncError(async (req, res, next) => {
   const Options={
     expires:new Date(Date.now()),
     httpOnly:true,
@@ -71,14 +71,14 @@ export const logoutUser = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Get my profile
-export const getMyProfle = catchAsyncErrors(async (req, res, next) => {
+export const getMyProfle = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user._id);
 
   res.status(200).json({ success: true, user });
 });
 
 // Change Password
-export const changePassword = catchAsyncErrors(async (req, res, next) => {
+export const changePassword = catchAsyncError(async (req, res, next) => {
   const { oldPassword, newPassword } = req.body;
 
   if (!oldPassword || !newPassword)
@@ -99,7 +99,7 @@ export const changePassword = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Update profile
-export const updateProfile = catchAsyncErrors(async (req, res, next) => {
+export const updateProfile = catchAsyncError(async (req, res, next) => {
   const { name, email } = req.body;
 
   const user = await User.findByIdAndUpdate(req.user._id);
@@ -115,7 +115,7 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
     .json({ success: true, message: "Profile Updated Successfully" });
 });
 // Update profile Picture
-export const updateProfilePicture = catchAsyncErrors(async (req, res, next) => {
+export const updateProfilePicture = catchAsyncError(async (req, res, next) => {
   // cloudinary to do
   const user=await User.findById(req.user._id)
      const file=req.file   
@@ -136,7 +136,7 @@ await user.save()
     .json({ success: true, message: "Profile Picture Updated Successfully" });
 });
 // Forget password  // needd to make middleware nodemailer
-export const forgetPassword = catchAsyncErrors(async (req, res, next) => {
+export const forgetPassword = catchAsyncError(async (req, res, next) => {
   const { email } = req.body;
   if (!email) next(new ErrorHandler("Please Enter Your Email", 400));
   const user = await User.findOne({ email });
@@ -162,7 +162,7 @@ export const forgetPassword = catchAsyncErrors(async (req, res, next) => {
     });
 });
 // reset password
-export const resetPassword = catchAsyncErrors(async (req, res, next) => {
+export const resetPassword = catchAsyncError(async (req, res, next) => {
   const { token } = req.params;
 
   const resetPasswordToken = crypto
@@ -195,7 +195,7 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Addtoplaylist
-export const addToPlaylist = catchAsyncErrors(async (req, res, next) => {
+export const addToPlaylist = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user._id);
   const course = await Course.findById(req.body.id);
   if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
@@ -218,7 +218,7 @@ export const addToPlaylist = catchAsyncErrors(async (req, res, next) => {
   });
 });
 // Remove From Playlist
-export const removeFromPlaylist = catchAsyncErrors(async (req, res, next) => {
+export const removeFromPlaylist = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user._id);
   const course = await Course.findById(req.query.id);
   if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
@@ -239,7 +239,7 @@ export const removeFromPlaylist = catchAsyncErrors(async (req, res, next) => {
 
 
 // get All USers --Admin
-export const getAllUsers=catchAsyncErrors(async(req,res,next)=>{
+export const getAllUsers=catchAsyncError(async(req,res,next)=>{
      
      const users=await User.find()
 
@@ -248,7 +248,7 @@ export const getAllUsers=catchAsyncErrors(async(req,res,next)=>{
 
 })
 // upadte user role --Admin
-export const updateUserRole=catchAsyncErrors(async(req,res,next)=>{
+export const updateUserRole=catchAsyncError(async(req,res,next)=>{
         
 
      const user=await User.findById((req.params.id))
@@ -263,7 +263,7 @@ export const updateUserRole=catchAsyncErrors(async(req,res,next)=>{
 
 })
 // delete User --Admin
-export const deleteUser=catchAsyncErrors(async(req,res,next)=>{
+export const deleteUser=catchAsyncError(async(req,res,next)=>{
         
 
      const user=await User.findById((req.params.id))
@@ -281,7 +281,7 @@ export const deleteUser=catchAsyncErrors(async(req,res,next)=>{
 })
 
 // delete my profile all 
-export const deleteMyProfile=catchAsyncErrors(async(req,res,next)=>{
+export const deleteMyProfile=catchAsyncError(async(req,res,next)=>{
         
      const user=await User.findById(req.user.id)
      await cloudinary.v2.uploader.destroy(user.avatar.public_id)
