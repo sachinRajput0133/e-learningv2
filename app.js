@@ -28,7 +28,7 @@ app.use("/api/v1", otherRoute);
 export default app;
 app.get("/", (req, res) =>
   res.send(
-    `<h1>site is working. click <a href=${process.env.FRONTEND_URL}> here </a> to visit frontend</h1>`
+    `<h1>site is working. click <a href=${process.env.FRONTEND_URL}> here   </a> to visit frontend</h1>`
   )
 );
 
