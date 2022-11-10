@@ -62,7 +62,7 @@ export const logoutUser = catchAsyncError(async (req, res, next) => {
     expires:new Date(Date.now()),
     httpOnly:true,
     secure:true,
-    sameSite:true   //none lex
+    sameSite: "none"  //none lex
 }
   res
     .status(200)

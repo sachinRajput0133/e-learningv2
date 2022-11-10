@@ -8,7 +8,7 @@ const Options={
     expires:new Date(Date.now() + 15*24*60*60*1000),
     httpOnly:true,
     secure:true, //WHEN TRUE COOKIE WON'T WORK ON POSTMAN 
-    sameSite:true   //none lex
+    sameSite: "none"  //none lex
 }
   res
     .status(statusCode)
