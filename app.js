@@ -24,9 +24,7 @@ app.use(
 );
 
  
-app.get('/products/:id', cors(corsOptionsDelegate), function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for a whitelisted domain.'})
-})
+
 app.use("/api/v1", courseRouter);
 app.use("/api/v1", userRouter);
 app.use("/api/v1", paymentRoute);
