@@ -13,13 +13,29 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+// app.use(
+//   cors({
+//     // origin: [process.env.FRONTEND_URL,'https://api.razorpay.com'],
+//     origin: true,
+//     // AccessControlAllowOrigin:"*",
+//     credentials: true, //OTHERWISE WON'T BE ABLE TO USE COOKIE
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//   })
+// );
 app.use(
   cors({
-    // origin: [process.env.FRONTEND_URL,'https://api.razorpay.com'],
     origin: true,
-    // AccessControlAllowOrigin:"*",
-    credentials: true, //OTHERWISE WON'T BE ABLE TO USE COOKIE
+    optionsSuccessStatus: 200,
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+app.options(
+  '*',
+  cors({
+    origin: true,
+    optionsSuccessStatus: 200,
+    credentials: true,
   })
 );
 app.use("/api/v1", courseRouter);
