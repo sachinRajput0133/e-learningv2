@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(
   cors({
     // origin: [process.env.FRONTEND_URL,'https://api.razorpay.com'],
-    origin:[process.env.FRONTEND_URL,'https://api.razorpay.com'],
+    origin:[process.env.FRONTEND_URL,'https://api.razorpay.com','https://checkout-static.razorpay.com/build/c15c2810f99ef3fd51cbbe1a20598e286eff50c1/checkout-frame.js'],
     // AccessControlAllowOrigin:"*",
     credentials: true, //OTHERWISE WON'T BE ABLE TO USE COOKIE
     methods: ["GET", "POST", "PUT", "DELETE"],
