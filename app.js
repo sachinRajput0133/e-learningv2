@@ -16,17 +16,17 @@ app.use(cookieParser());
 app.use(
   cors({
     // origin: [process.env.FRONTEND_URL,'https://api.razorpay.com'],
-    origin: true,
+    origin:[process.env.FRONTEND_URL,'https://api.razorpay.com'],
     // AccessControlAllowOrigin:"*",
     credentials: true, //OTHERWISE WON'T BE ABLE TO USE COOKIE
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
+   res.header("Access-Control-Allow-Origin", 'https://api.razorpay.com');
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+   next();
 }) 
 app.use("/api/v1", courseRouter);
 app.use("/api/v1", userRouter);
