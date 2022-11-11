@@ -15,7 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    // origin: [process.env.FRONTEND_URL,'https://api.razorpay.com'],
+    origin: "*",
+    // AccessControlAllowOrigin:"*",
     credentials: true, //OTHERWISE WON'T BE ABLE TO USE COOKIE
     methods: ["GET", "POST", "PUT", "DELETE"],
   })

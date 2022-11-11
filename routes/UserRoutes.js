@@ -38,7 +38,7 @@ router.route("/resetpassword/:token").put( resetPassword)
 // add course to plalise
 router.route("/addtoplaylist").post( isAuthenticated,addToPlaylist)
 
-// remove couorse from playlist
+// remove course from playlist
 router.route("/removefromplaylist").delete( isAuthenticated,removeFromPlaylist)
 
 // Admin Routes
