@@ -17,7 +17,7 @@ app.use(
   cors({
    
     origin:[process.env.FRONTEND_URL],
-   
+    AccessControlAllowOrigin: 'https://api.razorpay.com',
     credentials: true, //OTHERWISE WON'T BE ABLE TO USE COOKIE
     methods: ["GET", "POST", "PUT", "DELETE","HEAD",'https://api.razorpay.com'],
   })
