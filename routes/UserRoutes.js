@@ -35,7 +35,7 @@ router.route("/forgetpassword").post( forgetPassword)
 // Reset Password
 router.route("/resetpassword/:token").put( resetPassword)
 
-// add course to plalise
+// add course to playlist
 router.route("/addtoplaylist").post( isAuthenticated,addToPlaylist)
 
 // remove course from playlist
