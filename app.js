@@ -13,15 +13,42 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+// app.use(
+//   cors({
+   
+//     origin:[process.env.FRONTEND_URL],
+   
+//     credentials: true, //OTHERWISE WON'T BE ABLE TO USE COOKIE
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//   })
+// );
+
+var whitelist = [process.env.FRONTEND_URL, 'https://api.razorpay.com']
 app.use(
   cors({
-  
-    origin:[process.env.FRONTEND_URL],
+    
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+          callback(null, true)
+        } else {
+          callback(new Error('Not allowed by CORS'))
+        }
+      },
    
     credentials: true, //OTHERWISE WON'T BE ABLE TO USE COOKIE
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
+var whitelist = ['http://example1.com', 'http://example2.com']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
  
 
