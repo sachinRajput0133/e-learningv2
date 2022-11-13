@@ -46,7 +46,7 @@ router.route("/removefromplaylist").delete( isAuthenticated,removeFromPlaylist)
 router.route("/admin/users").get( isAuthenticated ,authorizeAdmin ,getAllUsers)
 
 // Update user role ,Delete user
-router.route("/admin/user/:id").get( isAuthenticated ,authorizeAdmin ,updateUserRole).delete(isAuthenticated ,authorizeAdmin ,deleteUser)
+router.route("/admin/user/:id").put( isAuthenticated ,authorizeAdmin ,updateUserRole).delete(isAuthenticated ,authorizeAdmin ,deleteUser)
 
 // for subscription resgister on raserpay
 
