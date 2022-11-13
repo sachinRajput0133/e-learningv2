@@ -274,13 +274,8 @@ export const deleteUser=catchAsyncError(async(req,res,next)=>{
         // cancel subscription
 
       await user.remove()
-      const Options={
-        expires:new Date(Date.now()),
-        httpOnly:true,
-        secure:true,
-        sameSite: "none"  //none lex
-    }
-     res.status(200).cookie("token",null,Options).json({success:true ,message:"User Deleted Successfully"})
+    
+     res.status(200).json({success:true ,message:"User Deleted Successfully"})
     
 
 })
