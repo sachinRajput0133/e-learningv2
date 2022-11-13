@@ -13,6 +13,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+  cors({
+   
+    origin:[process.env.FRONTEND_URL],
+   
+    credentials: true, //OTHERWISE WON'T BE ABLE TO USE COOKIE
+    methods: ["GET", "POST", "PUT", "DELETE","HEAD"],
+  })
+);
 // app.use(
 //   cors({
    
@@ -22,8 +31,6 @@ app.use(cookieParser());
 //     methods: ["GET", "POST", "PUT", "DELETE","HEAD"],
 //   })
 // );
-app.use( cors()
-);
 
  
 
