@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(
   cors({
    
-    origin:["*"],
+    origin:[process.env.RPAY,process.env.FRONTEND_URL],
    
     credentials: true, //OTHERWISE WON'T BE ABLE TO USE COOKIE
     methods: ["GET", "POST", "PUT", "DELETE","HEAD"],
