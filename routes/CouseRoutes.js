@@ -23,7 +23,7 @@ router
 
 router
   .route("/course/:id")
-  .get(isAuthenticated, authorizeSubscribers , getCourseLectures)
+  .get(isAuthenticated, getCourseLectures)
   .post(isAuthenticated, authorizeAdmin, singleUpload, addLecture)
   .delete(isAuthenticated, authorizeAdmin,deleteCourse)
 
